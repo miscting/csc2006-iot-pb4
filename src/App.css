@@ -1,5 +1,10 @@
 .App {
-  text-align: center;
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 }
 
 .App-logo {
@@ -14,12 +19,8 @@
 }
 
 .App-header {
+  text-align: center;
   background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
 }
@@ -35,4 +36,60 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.grid-container {
+  position: relative;
+  width: 65%;
+  height: 65%;
+}
+
+.grid-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.grid-row {
+  display: flex;
+}
+
+
+.grid-cell {
+  flex: 1;
+  height: 0;
+  padding-bottom: 9.05%;
+  border: 1px solid black;
+}
+
+.selected {
+  background-color: red;
+}
+
+.container {
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding-left: 5%;
+} 
+
+.item-list label {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.coordinates {
+  text-align: left;
+  padding-bottom: 10px;
 }
