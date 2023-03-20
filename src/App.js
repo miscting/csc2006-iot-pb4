@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import map from './map.png';
 import './App.css';
 
@@ -6,6 +7,17 @@ function App() {
   const [coordinates, setCoordinates] = useState({ x: '', y: '' });
   const [selectedItem, setSelectedItem] = useState('');
   const [selectedGridCoordinates, setSelectedGridCoordinates] = useState({ x: null, y: null });
+  const [data, setData] = useState({});
+  const [intervalId, setIntervalId] = useState(null); // Store intervalId in state
+  let x = 0;
+  let y = 0;
+
+  useEffect(() => {
+    return () => {
+      // Clean up the interval when the component unmounts or the selectedItem changes
+      clearInterval(intervalId);
+    };
+  }, [intervalId, selectedItem]);
 
   const handleCoordinateChange = (event, axis) => {
     const newCoordinates = { ...coordinates, [axis]: event.target.value };
@@ -16,20 +28,31 @@ function App() {
     const selectedItem = event.target.value;
     setSelectedItem(selectedItem);
 
+    clearInterval(intervalId); // Clear the previous interval
     // Set selected grid coordinates based on selected item
-    switch (selectedItem) { 
-      // Maybe not coordinates, but display the x, y
+    switch (selectedItem) {
       case 'A':
-        setSelectedGridCoordinates({ x: 4, y: 3 });
-        setCoordinates({ x: '1.3652654', y: '103.8458633' }); // Update X and Y coordinates
+        const id = setInterval(() => {
+          // x = x + 1;
+          // y = y + 1;
+          // setSelectedGridCoordinates({ x: x, y: y });
+          // setCoordinates({ x: x, y: y });
+          axios.get('http://192.168.229.162:8015/data')
+            .then(response => {
+                setSelectedGridCoordinates({ x: parseInt(response.data.x), y: parseInt(response.data.y) });
+                setCoordinates({ x: response.data.x, y: response.data.y }); // Update X and Y coordinates
+              })
+            .catch(error => console.log(error));
+        }, 5000);
+        setIntervalId(id); // Store the new intervalId in state
         break;
       case 'B':
         setSelectedGridCoordinates({ x: 8, y: 2 });
-        setCoordinates({ x: '1.3712772', y: '103.8394046' }); // Update X and Y coordinates
+        setCoordinates({ x: '1.3712772', y: '103.8394046' });
         break;
       case 'C':
         setSelectedGridCoordinates({ x: 3, y: 7 });
-        setCoordinates({ x: '1.3591946', y: '103.8270986' }); // Update X and Y coordinates
+        setCoordinates({ x: '1.3591946', y: '103.8270986' });
         break;
       default:
         setSelectedGridCoordinates({ x: null, y: null });
