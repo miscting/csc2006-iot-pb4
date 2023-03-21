@@ -66,8 +66,29 @@
   border: 1px solid black;
 }
 
+/* Endoscope 1 */
 .selected {
   background-color: red;
+  
+}
+
+/* Endoscope 2 */
+.selected1 {
+  background-color: blue;
+  
+}
+
+.text {
+  color: red;
+}
+
+.text1 {
+  color: blue;
+}
+
+/* Endoscope 1 and 2 in same grid */
+.sameSelected {
+  background-color: purple;
 }
 
 .container {
