@@ -32,8 +32,8 @@ function App() {
     axios.get('http://192.168.229.162:8015/data')
       .then(response => {
         setData(response.data)
-        setSelectedGridCoordinates({ x: parseInt(response.data.endoscopeShyam.x), y: parseInt(response.data.endoscopeShyam.y) });
-        setCoordinates({ x: response.data.endoscopeShyam.x, y: response.data.endoscopeShyam.y }); // Update X and Y coordinates
+        setSelectedGridCoordinates({ x: parseInt(response.data.endo_shyam.x), y: parseInt(response.data.endo_shyam.y) });
+        setCoordinates({ x: response.data.endo_shyam.x, y: response.data.endo_shyam.y }); // Update X and Y coordinates
 
         })
       .catch(error => console.log(error));
@@ -61,11 +61,11 @@ function App() {
                       //   data.endoscopeShyam.x === colIndex && data.endoscopeShyam.y === rowIndex ? ' selected' : ''                      
                       // }`}
                       className={`grid-cell${
-                        data.endoscopeShyam.x === colIndex && data.endoscopeShyam.y === rowIndex ? ' selected' : ''
+                        data.endo_shyam.x === colIndex && data.endo_shyam.y === rowIndex ? ' selected' : ''
                       }${
-                        data.endoscopeJeff.x === colIndex && data.endoscopeJeff.y === rowIndex ? ' selected1' : ''
+                        data.endo_jw.x === colIndex && data.endo_jw.y === rowIndex ? ' selected1' : ''
                       }${
-                        data.endoscopeShyam.x === colIndex && data.endoscopeShyam.y === rowIndex && data.endoscopeJeff.x === colIndex && data.endoscopeJeff.y === rowIndex ? ' sameSelected' : ''
+                        data.endo_shyam.x === colIndex && data.endo_shyam.y === rowIndex && data.endo_jw.x === colIndex && data.endo_jw.y === rowIndex ? ' sameSelected' : ''
                       }`}
                       key={`${rowIndex}-${colIndex}`}
                     />
